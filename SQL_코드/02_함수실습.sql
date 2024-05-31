@@ -137,7 +137,7 @@ FROM EMPLOYEE;
 
 -- 2. 주민번호에서 모든 하이픈(-)을 공백으로 대체 ""
 --> EMP_NO, PHONE, AS 수정된주민번호
-SELECT PHONE , EMP_NO ,  REPLACE(EMP_NO,'-','') AS "수정된주민번호"
+SELECT EMP_NAME , EMP_NO ,  REPLACE(EMP_NO,'-','') AS "수정된주민번호"
 FROM EMPLOYEE;
 
 -- 3. 이름에선 '김'을  'KIM'으로 대체
@@ -145,7 +145,7 @@ FROM EMPLOYEE;
 SELECT EMP_NAME , REPLACE(EMP_NAME,'김','KIM') AS"수정된이름"
 FROM EMPLOYEE;
 
--- 4. 직무코드에서 J를 JOB 으로 대체
---> EMP_ID, JOB_CODE, 수정된 직무코드
+-- 4. 직무코드에서 J를 JOB 으로 대체 
+--> EMP_ID, JOB_CODE, 수정된 직 무코드
 SELECT EMP_ID, JOB_CODE  , REPLACE(JOB_CODE,'J','JOB') AS "수정된 직무코드"
 FROM EMPLOYEE;
