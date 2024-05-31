@@ -32,7 +32,7 @@ FROM EMPLOYEE
 WHERE LENGTH(EMAIL) <=12 --12 길이보다 이하인 이메일만.
 ORDER BY "이메일길이";
 
-
+ 
 
 --INSTR(문자열 | 컬럼명, "찾을 문자열" [, 찾는 것을 시작할 위치 [,순번]])
 
