@@ -295,6 +295,102 @@ null   null 70096240   <-- 전체 데이터의 급여 합계 (총계)
 --UNION INTERSECT MINUS
 
 
+/*************
+집합 연산 (SET OPERATION)
+
+여러 개의 SELECT 결과물을 하나의 쿼리로 만드는 연산자
+여러가지 조건이 있을 때 그에 해당하는 여러개의 결과값을 결합시키고 싶을 때 사용
+--장점 : 초보자들이 사용하기 좋음(조건을 덜 생각해도 됨)
+--주의할점 : 집합 연산에 사용되는 SELECT 문은 SELECT절이 동일해야함
+
+--UNION은         OR 같은 개념 --> 중복제거
+--INTERSECT AND 같은 개념
+--MINUS는         차집합 같은 개념
+--UNION ALL 은 OR 결과 값에 AND 결과 같이 더해진 값 --> 중복이 제거되지 않은 채로 합쳐짐
+
+**************/
+
+---- UNINO : 여러개의 쿼리 결과를 하나로 합치는 연산자 ----
+--중복된 영역을 제외하여 하나로 합침
+
+--부서코드가 'D5' 또는 'D6'인 사원 이름, 부서코드 조회
+
+-- 1) 부서코드가 'D5' 조회
+SELECT EMP_NAME, DEPT_CODE
+FROM EMPLOYEE
+WHERE DEPT_CODE = 'D5'
+
+UNION
+
+-- 2) 부서코드가 'D6' 조회
+SELECT EMP_NAME, DEPT_CODE
+FROM EMPLOYEE
+WHERE DEPT_CODE = 'D6';
+
+-- UNION ALL : 여러개의 쿼리 결과를 하나로 합치는 연산자
+-- UNION과 차이점은 중복영역을 모두 포함
+
+--부서코드가 'D5'이거나 급여가 300만 초과하는 사원의
+--이름 부서코드 급여 조회(중복포함)
+
+--1) 부서코드가 'D5'
+SELECT EMP_NAME, DEPT_CODE, SALARY
+FROM EMPLOYEE
+WHERE DEPT_CODE = 'D5'
+
+UNION ALL
+
+--2) 급여가 300만 초과
+SELECT EMP_NAME, DEPT_CODE, SALARY
+FROM EMPLOYEE
+WHERE SALARY > 3000000;
+
+
+
+----INTERSECT : 여러개의 SELECT 한 결과에서 공통 부분만 결과로 추출 ----
+
+--부서코드가 'D5' 이면서 급여가 300만 초과하는 사원의
+-- 이름, 부서코드, 급여조회
+-- 1) 부서코드가 'D5'
+SELECT EMP_NAME, DEPT_CODE, SALARY
+FROM EMPLOYEE
+WHERE DEPT_CODE = 'D5'
+
+INTERSECT
+
+-- 2) 급여가 300만원 초과
+SELECT EMP_NAME, DEPT_CODE, SALARY
+FROM EMPLOYEE
+WHERE SALARY > 3000000;
+
+-- > INTERSECT 사용하지 않아도, GROUP BY WHERE 조건으로 구분지을 수 있음
+
+
+---- MINUS : 선행 SELECT 결과에서 다음 SELECT 결과와 겹치는 부분을 제외한 나머지 부분만 추출 ----
+
+--부서코드 D5 중 급여가 300만원 초과인 직원 제외
+-- 1) 부서코드가 'D5'
+SELECT EMP_NAME, DEPT_CODE, SALARY
+FROM EMPLOYEE
+WHERE DEPT_CODE = 'D5'
+
+MINUS 
+
+-- 2) 급여가 300만원 초과
+SELECT EMP_NAME, DEPT_CODE, SALARY
+FROM EMPLOYEE
+WHERE SALARY > 3000000;
+
+-- > MINUS 사용하지 않아도, GROUP BY WHERE 조건으로 구분지을 수 있음
+
+
+
+
+
+
+
+
+
 
 
 
