@@ -1,0 +1,50 @@
+/***** ORDER BY 실습 *****/
+--1.
+SELECT *
+FROM DEPARTMENT
+ORDER BY DEPT_TITLE;
+2.
+SELECT *
+FROM EMPLOYEE
+ORDER BY SALARY DESC;
+-- FROM 찾을테이블 위치 선정 -> SELECT 조회 -> ORDER BY 정렬
+
+/***** HAVING 실습 *****/
+--1.
+SELECT DEPT_CODE, AVG(SALARY)
+FROM EMPLOYEE
+GROUP BY DEPT_CODE
+HAVING AVG(SALARY) > 3000000;
+-- WHERE : 조건에 해당하는 사람들을 검색한다음 조건에 부합하는 것처럼 보임
+-- GROUP HAVING : 모든 ~ 사람들을 조회하고 조건에 맞는 부서만 선별
+--2.
+SELECT JOB_CODE, COUNT(*)
+FROM EMPLOYEE
+GROUP BY JOB_CODE
+HAVING COUNT(*) > 3;
+
+-- FROM 찾을테이블 위치선정 --> GROUP BY 묶을 그룹선정 --> HAVING 조건설정 --> SELECT 조건에맞는 내용 조회
+
+/***** GROUP BY *****/
+--1.
+SELECT DEPT_CODE, COUNT(*) AS "직원 수"
+FROM EMPLOYEE
+GROUP BY DEPT_CODE;
+
+--2.
+SELECT JOB_CODE, FLOOR(AVG(SALARY)) AS "평균 급여"
+FROM EMPLOYEE
+GROUP BY JOB_CODE;
+--> AVG나 SUM으로 수의 합에 대한 결과를 구할 때
+---> 정수 밑에 있는 소수점을 제거하길 원한다면
+-----> CEIL, FLOOR, ROUND 설정
+
+/***** WHERE *****/
+-- 1.
+SELECT EMP_NAME, SALARY AS "급여"
+FROM EMPLOYEE
+WHERE SALARY > 3000000;
+-- 2.
+SELECT EMP_NAME, DEPT_CODE AS"부서코드"
+FROM EMPLOYEE
+WHERE DEPT_CODE = 'D1';
